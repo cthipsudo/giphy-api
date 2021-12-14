@@ -4,7 +4,7 @@ let searchTerm = 'cats'
 const pullImage = () => {
   const img = document.querySelector("img");
   fetch(
-    "https://api.giphy.com/v1/gifs/translate?api_key=9b1DIYcUHy5v1sIRqdKrVCzevE0anL6J&s=cats",
+    `https://api.giphy.com/v1/gifs/translate?api_key=9b1DIYcUHy5v1sIRqdKrVCzevE0anL6J&s=${searchTerm}`,
     { mode: "cors" }
   )
     .then((res) => {
@@ -13,6 +13,9 @@ const pullImage = () => {
     .then((res) => {
       //console.log(res.data.images.original.url);
       img.src = res.data.images.original.url;
+    })
+    .catch((err)=> {
+      console.log(err);
     });
 };
 
@@ -29,6 +32,12 @@ const addListeners = () => {
     }
     searchTerm = dataArr[0];
     console.log(searchTerm);
+    pullImage();
+  });
+
+  const newImageButton = document.querySelector('#new-image');
+  newImageButton.addEventListener('click', () => {
+    pullImage();
   });
 }
 
