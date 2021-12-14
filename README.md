@@ -1,1 +1,1 @@
-# HTML Boilerplate
+# Giphy API
